@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+// import About from './components/About';
+import Navbar from './components/Navbar';
+import TextForm from './components/TextForm';
 
 function App() {
+  const [mode, setCurrMode] = useState("light");
+
+  const toggleMode = () => {
+    if (mode === 'dark') {
+      setCurrMode('light');
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black';
+    } else {
+      setCurrMode('dark');
+      document.body.style.backgroundColor = 'black';
+      document.body.style.color = 'white';
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <Navbar title="TextConvertor" about="About Us" currMode={mode} toggleMode={toggleMode} />
+          <div className='container'>
+            <TextForm heading="Enter the text to convert" currMode={mode}  />
+          </div>
+    </>
   );
 }
 
